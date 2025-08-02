@@ -3,6 +3,7 @@ import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
+import fs from 'fs';
 
 export default defineConfig({
     plugins: [
@@ -32,6 +33,12 @@ export default defineConfig({
         },
     },
     server: {
+        https: {
+            key: fs.readFileSync('C:/OSPanel/data/ssl/projects/workflow-taki.loc/cert.key'),
+            cert: fs.readFileSync('C:/OSPanel/data/ssl/projects/workflow-taki.loc/cert.crt'),
+        },
+        host: 'workflow-taki.loc',
+        port: 5173,             
         cors: true,
     },
     build: {

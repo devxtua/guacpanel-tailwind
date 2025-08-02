@@ -7,6 +7,11 @@ import "../css/app.css";
 import { initializeTheme } from "./utils/themeInit";
 import InstantSearch from "vue-instantsearch/vue3/es";
 
+import axios from 'axios';
+axios.defaults.baseURL = import.meta.env.VITE_APP_URL || window.location.origin;
+axios.defaults.withCredentials = true;
+
+
 // Initialize theme before Vue app starts
 initializeTheme();
 

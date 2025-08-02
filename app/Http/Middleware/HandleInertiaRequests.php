@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
                     'user' => $request->user() ? [
                         'name' => $request->user()->name,
                         'roles' => $request->user()->roles->pluck('name'),
+                        'permissions' => $request->user()->getAllPermissions()->pluck('name'),
                         'avatar' => $avatar
                             ->create($request->user()->name)
                             ->setTheme('pastel')
