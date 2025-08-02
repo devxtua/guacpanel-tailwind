@@ -24,6 +24,8 @@ use App\Http\Controllers\AdminSystemNoticeController;
 use App\Http\Controllers\AdminPermissionRoleController;
 use App\Http\Controllers\ForcePasswordChangeController;
 use App\Http\Controllers\AdminPersonalisationController;
+use App\Http\Controllers\Shopify\InstallPageController;
+use Kyon147\LaravelShopify\Http\Controllers\OAuthController;
 
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -196,3 +198,18 @@ Route::middleware(['guest', 'web'])->group(function () {
         });
     });
 });
+
+// shopify
+Route::get('/shopify/install-page', InstallPageController::class)
+    ->name('shopify.install.page');
+
+Route::get('/shopify/install', [OAuthController::class, 'install'])->name('shopify.install');
+Route::get('/shopify/callback', [OAuthController::class, 'callback'])->name('shopify.callback');
+Route::middleware(['auth.shopify'])->group(function () {
+    Route::get('/shopify/dashboard', function () {
+        return 'Shopify Dashboard';
+    });
+});
+
+
+

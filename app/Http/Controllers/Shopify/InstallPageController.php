@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shopify;
 
 use App\Models\Personalisation;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PageController extends Controller
+class InstallPageController
 {
-    public function home()
+    public function __invoke(Request $request)
     {
         $settings = Personalisation::first();
 
-        return Inertia::render('Home', [
+        return Inertia::render('Shopify/Install', [
+            'shop' => $request->query('shop'),
             'appName' => $settings?->app_name ?? 'Shopify App',
             'appLogo' => $settings?->app_logo
                 ? asset('storage/' . $settings->app_logo)
                 : null,
         ]);
     }
-
-    
-    public function terms()
-    {
-        return Inertia::render('Terms');
-    }
 }
+
+
+
