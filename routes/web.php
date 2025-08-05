@@ -25,7 +25,7 @@ use App\Http\Controllers\AdminPermissionRoleController;
 use App\Http\Controllers\ForcePasswordChangeController;
 use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
-use Osiset\ShopifyApp\Http\Controllers\AuthController;
+use Osiset\ShopifyApp\Http\Controllers\HomeController;
 use App\Http\Controllers\KanbanController;
 
 
@@ -204,17 +204,38 @@ Route::middleware(['guest', 'web'])->group(function () {
 });
 
 // shopify
-Route::get('/shopify/install-page', InstallPageController::class)
-    ->name('shopify.install.page');
+// Route::get('/shopify/install-page', InstallPageController::class)
+//     ->name('shopify.install.page');
 
-Route::get('/shopify/install', [AuthController::class, 'install'])->name('shopify.install');
-Route::get('/shopify/callback', [AuthController::class, 'callback'])->name('shopify.callback');
+// Route::get('/shopify/install', [AuthController::class, 'install'])->name('shopify.install');
+// Route::get('/shopify/callback', [AuthController::class, 'callback'])->name('shopify.callback');
 
-Route::middleware(['auth.shopify'])->group(function () {
-    Route::get('/shopify/dashboard', function () {
-        return 'Shopify Dashboard';
+// Route::middleware(['auth.shopify'])->group(function () {
+//     Route::get('/shopify/dashboard', function () {
+//         return 'Shopify Dashboard';
+//     });
+// });
+
+// Shopify часть
+
+Route::prefix('shopify')->group(function () {
+    // Установка Shopify-приложения
+    Route::get('/install-page', InstallPageController::class)->name('shopify.install.page');
+
+    // Shopify-дэшборд (доступен после установки и авторизации)
+    Route::middleware(['auth.shopify'])->group(function () {
+        Route::get('/dashboard', fn () => 'Shopify Dashboard');
     });
+
+    // Главная Shopify-страница
+    Route::get('/', [HomeController::class, 'index'])
+        ->middleware(['verify.shopify'])
+        ->name('shopify.home');
 });
+
+
+
+
 
 
 
