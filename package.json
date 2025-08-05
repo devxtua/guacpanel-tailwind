@@ -40,6 +40,7 @@
         "vue-instantsearch": "^4.21.0",
         "vue-prism-component": "^2.0.0",
         "vue3-apexcharts": "^1.8.0",
+        "vuedraggable": "^4.1.0",
         "ziggy-js": "^2.3.0"
     }
 }

@@ -26,6 +26,8 @@ use App\Http\Controllers\ForcePasswordChangeController;
 use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
 use Kyon147\LaravelShopify\Http\Controllers\OAuthController;
+use App\Http\Controllers\KanbanController;
+
 
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -37,6 +39,8 @@ Route::middleware(['web', 'auth', 'auth.session'])->group(function () {
 
     Route::middleware(['disable.account', 'force.password.change', 'password.expired'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/kanban', [KanbanController::class, 'index'])->name('kanban');
+
 
         // User Account Management Routes
         Route::prefix('user')->name('user.')->group(function () {
