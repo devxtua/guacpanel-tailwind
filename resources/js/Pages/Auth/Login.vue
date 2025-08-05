@@ -13,7 +13,11 @@ defineOptions({
 
 const { settings: { passwordlessLogin = true } = {} } = usePage().props
 
-
+const form = useForm({
+    email: 'ota@example.com',
+    password: 'password',
+    remember: false,
+})
 
 const showMagicLinkModal = ref(false)
 const magicLinkForm = useForm({
