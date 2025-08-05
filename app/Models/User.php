@@ -183,4 +183,12 @@ class User extends Authenticatable implements Auditable
             'collection_name' => 'users',
         ]);
     }
+
+    public function shops()
+    {
+        return $this->belongsToMany(Shop::class)
+            ->using(ShopUser::class)
+            ->withTimestamps();
+    }
+
 }
