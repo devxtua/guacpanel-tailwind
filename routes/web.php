@@ -25,7 +25,7 @@ use App\Http\Controllers\AdminPermissionRoleController;
 use App\Http\Controllers\ForcePasswordChangeController;
 use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
-use Kyon147\LaravelShopify\Http\Controllers\OAuthController;
+use Osiset\ShopifyApp\Http\Controllers\AuthController;
 use App\Http\Controllers\KanbanController;
 
 
