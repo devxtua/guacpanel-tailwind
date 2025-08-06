@@ -9,6 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Osiset\ShopifyApp\Contracts\ShopModel as IShopModel;
 use Osiset\ShopifyApp\Traits\ShopModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserShopify extends Authenticatable implements IShopModel
 {
@@ -34,7 +35,7 @@ class UserShopify extends Authenticatable implements IShopModel
         'deleted_at' => 'datetime',
     ];
 
-    public function plan()
+    public function plan(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
     }

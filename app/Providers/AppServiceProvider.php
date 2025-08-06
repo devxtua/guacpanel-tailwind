@@ -17,6 +17,9 @@ use Spatie\Health\Checks\Checks\EnvironmentCheck;
 use Spatie\Health\Checks\Checks\OptimizedAppCheck;
 use Spatie\Health\Checks\Checks\UsedDiskSpaceCheck;
 use Illuminate\Support\Facades\URL;
+use Osiset\ShopifyApp\Contracts\ShopModel as IShopModel;
+use App\Models\UserShopify;
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      */
     public function register(): void {
+
+        $this->app->bind(IShopModel::class, UserShopify::class);
+        
         Health::checks([
             UsedDiskSpaceCheck::new(),
             DatabaseCheck::new(),
