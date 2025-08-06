@@ -7,7 +7,7 @@
 .env
 .env.backup
 .env.production
-vite.config.js
+
 
 .phpunit.cache
 .phpunit.result.cache

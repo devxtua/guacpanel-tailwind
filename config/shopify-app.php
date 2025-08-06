@@ -516,7 +516,7 @@ return [
         /*
         * user_model
         */
-        'user_model' => \App\Models\UserShopify::class, 
+        'shop_model' => \App\Models\UserShopify::class, 
     ],
     
     'table_names' => [
