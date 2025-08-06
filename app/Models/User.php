@@ -17,9 +17,6 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Osiset\ShopifyApp\Contracts\ShopModel as IShopModel;
 use Osiset\ShopifyApp\Traits\ShopModel;
-use ShopModel;
-
-
 
 
 
@@ -34,6 +31,8 @@ class User extends Authenticatable implements Auditable, IShopModel
     use HasRoles;
 
     use Searchable;
+
+    use ShopModel;
 
     protected $guarded = ['id'];
 
