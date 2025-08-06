@@ -7,6 +7,8 @@
 .env
 .env.backup
 .env.production
+vite.config.js
+
 .phpunit.cache
 .phpunit.result.cache
 Homestead.json
@@ -28,4 +30,4 @@ typesense-server-*.tar.gz.*
 typesense-server.md5.txt
 typesense/data/
 data/
-vite.config.js
+

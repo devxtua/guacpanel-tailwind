@@ -64,8 +64,7 @@ class CreateChargesTable extends Migration
             $table->timestamp('expires_on')->nullable();
 
             // Plan ID for the charge
-            $table->ulid('plan_id')->nullable();
-
+            $table->integer('plan_id')->unsigned()->nullable();
 
             // Description support
             $table->string('description')->nullable();
@@ -79,14 +78,16 @@ class CreateChargesTable extends Migration
             // Allows for soft deleting
             $table->softDeletes();
 
-            $table->ulid(Util::getShopsTableForeignKey());
+            if ($this->getLaravelVersion() < 5.8) {
+                $table->integer(Util::getShopsTableForeignKey())->unsigned();
+            } else {
+                $table->bigInteger(Util::getShopsTableForeignKey())->unsigned();
+            }
 
             // Linking
             $table->foreign(Util::getShopsTableForeignKey())->references('id')->on(Util::getShopsTable())->onDelete('cascade');
-            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('set null');
-
+            $table->foreign('plan_id')->references('id')->on(Util::getShopifyConfig('table_names.plans', 'plans'));
         });
-
     }
 
     /**

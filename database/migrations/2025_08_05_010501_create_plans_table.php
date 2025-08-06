@@ -15,7 +15,7 @@ class CreatePlansTable extends Migration
     public function up()
     {
         Schema::create(Util::getShopifyConfig('table_names.plans', 'plans'), function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->increments('id');
 
             // The type of plan, either PlanType::RECURRING (0) or PlanType::ONETIME (1)
             $table->string('type');

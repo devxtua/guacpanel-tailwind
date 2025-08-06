@@ -15,12 +15,8 @@ use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Osiset\ShopifyApp\Contracts\ShopModel as IShopModel;
-use Osiset\ShopifyApp\Traits\ShopModel;
 
-
-
-class User extends Authenticatable implements Auditable, IShopModel
+class User extends Authenticatable implements Auditable
 {
     use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable, SoftDeletes;
 
@@ -31,8 +27,6 @@ class User extends Authenticatable implements Auditable, IShopModel
     use HasRoles;
 
     use Searchable;
-
-    use ShopModel;
 
     protected $guarded = ['id'];
 
@@ -49,7 +43,7 @@ class User extends Authenticatable implements Auditable, IShopModel
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // 'password' => 'hashed',
+        'password' => 'hashed',
         'password_expiry_at' => 'datetime',
         'password_changed_at' => 'datetime',
         'force_password_change' => 'boolean',
@@ -189,12 +183,4 @@ class User extends Authenticatable implements Auditable, IShopModel
             'collection_name' => 'users',
         ]);
     }
-
-    public function shops()
-    {
-        return $this->belongsToMany(Shop::class)
-            ->using(ShopUser::class)
-            ->withTimestamps();
-    }
-
 }

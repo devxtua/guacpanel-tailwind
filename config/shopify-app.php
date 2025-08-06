@@ -528,7 +528,7 @@ return [
         /*
          * The table name for the Shop.
          */
-        'shops' => 'users',
+        'shops' => 'users_shopify',
     ],
 
     /*
