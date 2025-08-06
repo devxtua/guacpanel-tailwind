@@ -513,17 +513,12 @@ return [
         * The fully qualified class name of the Plan model.
         */
         'plan' => Osiset\ShopifyApp\Storage\Models\Plan::class,
+        /*
+        * user_model
+        */
+        'user_model' => \App\Models\UserShopify::class, 
     ],
     
-    /*
-    |--------------------------------------------------------------------------
-    | user_model
-    |--------------------------------------------------------------------------
-    */
-
-    'user_model' => \App\Models\UserShopify::class,
-
-
     'table_names' => [
         /*
         * The table name for Charge model.
