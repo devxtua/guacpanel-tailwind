@@ -69,6 +69,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // Shopify пользователь
+        'users_shopify' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserShopify::class,
+        ],
     ],
 
     /*
