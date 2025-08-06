@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'shopify' => [
+            'driver' => 'session',
+            'provider' => 'users_shopify',
+        ],
     ],
 
     /*
@@ -65,12 +70,6 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-
-        // Shopify пользователь
         'users_shopify' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserShopify::class,

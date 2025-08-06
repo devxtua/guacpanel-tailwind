@@ -27,6 +27,7 @@ use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
 use Osiset\ShopifyApp\Http\Controllers\HomeController;
 use App\Http\Controllers\KanbanController;
+use Osiset\ShopifyApp\Contracts\ShopModel;
 
 
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
@@ -221,10 +222,24 @@ Route::middleware(['guest', 'web'])->group(function () {
 
 Route::get('/install-page', InstallPageController::class)->name('install.page');
     
-    // Shopify-дэшборд (после установки и авторизации)
+// Shopify-дэшборд (после установки и авторизации)
 Route::middleware(['auth.shopify'])->group(function () {
-    Route::get('/preferences', fn () => 'Shopify Preferences');
+    Route::get('/dashboard', fn () => view('dashboard'));
 });
+
+
+Route::get('/debug-shop-model', function () {
+    return get_class(app(ShopModel::class));
+});
+
+Route::get('/debug-shopify-user', function () {
+    return [
+        'auth_user' => auth()->user()?->getMorphClass(),
+        'shopify_user' => auth()->guard('shopify')->user()?->getMorphClass(),
+        'shopify_model' => get_class(auth()->guard('shopify')->user()),
+    ];
+});
+
 
 
 
