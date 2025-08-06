@@ -224,7 +224,7 @@ Route::prefix('shopify')->group(function () {
 
     // Shopify-дэшборд (доступен после установки и авторизации)
     Route::middleware(['auth.shopify'])->group(function () {
-        Route::get('/dashboard', fn () => 'Shopify Dashboard');
+        Route::get('/preferences', fn () => 'Shopify Preferences');
     });
 
     // Главная Shopify-страница

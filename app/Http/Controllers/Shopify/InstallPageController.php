@@ -14,12 +14,14 @@ class InstallPageController
 
         return Inertia::render('Shopify/Install', [
             'shop' => $request->query('shop'),
-            'appName' => $settings?->app_name ?? 'Shopify App',
+            'appName' => $settings?->app_name ?? config('shopify-app.app_name', 'Shopify App'),
             'appLogo' => $settings?->app_logo
                 ? asset('storage/' . $settings->app_logo)
                 : null,
+            'apiKey' => config('shopify-app.api_key'), // вот здесь он берётся из .env
         ]);
     }
+
 }
 
 
