@@ -218,20 +218,14 @@ Route::middleware(['guest', 'web'])->group(function () {
 
 // Shopify часть
 
-Route::prefix('shopify')->group(function () {
-    // Установка Shopify-приложения
-    Route::get('/install-page', InstallPageController::class)->name('shopify.install.page');
 
-    // Shopify-дэшборд (доступен после установки и авторизации)
-    Route::middleware(['auth.shopify'])->group(function () {
-        Route::get('/preferences', fn () => 'Shopify Preferences');
-    });
-
-    // Главная Shopify-страница
-    Route::get('/', [HomeController::class, 'index'])
-        ->middleware(['verify.shopify'])
-        ->name('shopify.home');
+Route::get('/install-page', InstallPageController::class)->name('install.page');
+    
+    // Shopify-дэшборд (после установки и авторизации)
+Route::middleware(['auth.shopify'])->group(function () {
+    Route::get('/preferences', fn () => 'Shopify Preferences');
 });
+
 
 
 

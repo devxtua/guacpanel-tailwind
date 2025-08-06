@@ -28,3 +28,4 @@ typesense-server-*.tar.gz.*
 typesense-server.md5.txt
 typesense/data/
 data/
+vite.config.js
