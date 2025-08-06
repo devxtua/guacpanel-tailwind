@@ -12,7 +12,7 @@ const props = defineProps({
 // Для ручного ввода магазина
 const shopInput = ref(props.shop ?? '')
 
-const redirectUri = encodeURIComponent('https://tandooria.com/shopify/authenticate')
+const redirectUri = encodeURIComponent('https://tandooria.com/authenticate')
 const scopes = 'read_products,write_products'
 
 function installApp() {
