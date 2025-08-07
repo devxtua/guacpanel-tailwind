@@ -212,7 +212,7 @@ Route::middleware(['guest', 'web'])->group(function () {
 // Shopify часть
 Route::get('/install-page', InstallPageController::class)->name('install.page');
 
-Route::get('/auth', [AuthController::class, 'index'])->name('shopify.auth');
+Route::get('/auth', [AuthController::class, 'authenticate'])->name('shopify.authenticate');
 Route::get('/auth/callback', [AuthController::class, 'callback'])->name('shopify.callback');
 
 Route::middleware(['auth.shopify'])->group(function () {
