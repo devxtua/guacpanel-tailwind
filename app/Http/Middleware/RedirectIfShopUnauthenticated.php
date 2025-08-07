@@ -16,7 +16,7 @@ class RedirectIfShopUnauthenticated
         $shop = $request->query('shop');
 
         if ($shop && Str::endsWith($shop, '.myshopify.com') && !Auth::guard('shopify')->check()) {
-            return redirect()->route('shopify.authenticate', ['shop' => $shop]);
+            return redirect()->route('shopify.auth', ['shop' => $shop]);
         }
 
         return $next($request);
