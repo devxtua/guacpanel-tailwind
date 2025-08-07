@@ -27,9 +27,10 @@ use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
 use Osiset\ShopifyApp\Http\Controllers\HomeController;
 use App\Http\Controllers\KanbanController;
-use Osiset\ShopifyApp\ShopifyApp;
 
-ShopifyApp::routes();
+
+\Osiset\ShopifyApp\Routes\Route::routes();
+
 
 
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
