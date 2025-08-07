@@ -212,7 +212,21 @@ Route::middleware(['guest', 'web'])->group(function () {
 // Shopify часть
 Route::get('/install-page', InstallPageController::class)->name('install.page');
 
-Route::get('/auth', [AuthController::class, 'authenticate'])->name('shopify.authenticate');
+Route::get('/auth', function (Request $request) {
+    $shop = $request->get('shop');
+
+    // Проверка, нужен ли редирект через AppBridge (iframe)
+    if ($request->header('X-Shopify-API-Request-Failure-Reauthorize-Url')) {
+        return Inertia::render('AuthRedirect', [
+            'shop' => $shop,
+            'redirectUrl' => route('shopify.authenticate', ['shop' => $shop])
+        ]);
+    }
+
+    // Иначе — обычная Shopify аутентификация
+    return app(\Osiset\ShopifyApp\Http\Controllers\AuthController::class)->authenticate($request);
+})->name('shopify.authenticate');
+
 Route::get('/auth/callback', [AuthController::class, 'callback'])->name('shopify.callback');
 
 Route::middleware(['auth.shopify'])->group(function () {
