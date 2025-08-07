@@ -29,7 +29,7 @@ use Osiset\ShopifyApp\Http\Controllers\HomeController;
 use App\Http\Controllers\KanbanController;
 
 
-\Osiset\ShopifyApp\Routes\Route::routes();
+\Osiset\ShopifyApp\ShopifyApp::routes();
 
 
 
