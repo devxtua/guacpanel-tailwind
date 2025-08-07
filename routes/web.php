@@ -25,9 +25,8 @@ use App\Http\Controllers\AdminPermissionRoleController;
 use App\Http\Controllers\ForcePasswordChangeController;
 use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
-use Osiset\ShopifyApp\Http\Controllers\HomeController;
-use App\Http\Controllers\KanbanController;
 
+use App\Http\Controllers\KanbanController;
 use Osiset\ShopifyApp\Http\Controllers\AuthController;
 use Osiset\ShopifyApp\Http\Controllers\HomeController;
 
