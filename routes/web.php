@@ -31,7 +31,8 @@ use Osiset\ShopifyApp\Contracts\ShopModel;
 
 
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
-Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/', [PageController::class, 'home'])->name('home')->middleware('shopify.redirect');
+
 
 // Authenticated Routes
 Route::middleware(['web', 'auth', 'auth.session'])->group(function () {
@@ -204,28 +205,23 @@ Route::middleware(['guest', 'web'])->group(function () {
     });
 });
 
-// shopify
-// Route::get('/shopify/install-page', InstallPageController::class)
-//     ->name('shopify.install.page');
 
-// Route::get('/shopify/install', [AuthController::class, 'install'])->name('shopify.install');
-// Route::get('/shopify/callback', [AuthController::class, 'callback'])->name('shopify.callback');
-
-// Route::middleware(['auth.shopify'])->group(function () {
-//     Route::get('/shopify/dashboard', function () {
-//         return 'Shopify Dashboard';
-//     });
-// });
 
 // Shopify часть
-
-
 Route::get('/install-page', InstallPageController::class)->name('install.page');
-    
-// Shopify-дэшборд (после установки и авторизации)
-Route::middleware('auth.shopify:shopify')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/authenticate', [AuthController::class, 'authenticate'])->name('shopify.authenticate');
+Route::get('/auth/callback', [AuthController::class, 'callback'])->name('shopify.callback');
+
+Route::middleware(['web', 'auth:shopify', 'auth.session'])->group(function () {
+    Route::get('/shopify/dashboard', function () {
+        return response('Добро пожаловать, Shopify-пользователь!', 200);
+    })->name('shopify.dashboard');
 });
+
+
+
+
 
 
 
