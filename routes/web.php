@@ -27,7 +27,9 @@ use App\Http\Controllers\AdminPersonalisationController;
 use App\Http\Controllers\Shopify\InstallPageController;
 use Osiset\ShopifyApp\Http\Controllers\HomeController;
 use App\Http\Controllers\KanbanController;
-use Osiset\ShopifyApp\Contracts\ShopModel;
+use Osiset\ShopifyApp\ShopifyApp;
+
+ShopifyApp::routes();
 
 
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
@@ -210,14 +212,10 @@ Route::middleware(['guest', 'web'])->group(function () {
 // Shopify часть
 Route::get('/install-page', InstallPageController::class)->name('install.page');
 
-Route::get('/authenticate', [AuthController::class, 'authenticate'])->name('shopify.authenticate');
-Route::get('/auth/callback', [AuthController::class, 'callback'])->name('shopify.callback');
-
-Route::middleware(['web', 'auth:shopify', 'auth.session'])->group(function () {
-    Route::get('/shopify/dashboard', function () {
-        return response('Добро пожаловать, Shopify-пользователь!', 200);
-    })->name('shopify.dashboard');
+Route::middleware(['auth.shopify'])->group(function () {
+    Route::get('/shopify/dashboard', fn () => response('Shopify user'))->name('shopify.dashboard');
 });
+
 
 
 
