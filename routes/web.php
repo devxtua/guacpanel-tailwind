@@ -213,7 +213,8 @@ Route::middleware(['guest', 'web'])->group(function () {
 Route::get('/install-page', InstallPageController::class)->name('install.page');
 
 Route::get('/auth', function (Request $request) {
-    $shop = $request->get('shop');
+    $shop = $request->query('shop');
+
 
     // Проверка, нужен ли редирект через AppBridge (iframe)
     if ($request->header('X-Shopify-API-Request-Failure-Reauthorize-Url')) {
