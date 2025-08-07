@@ -28,8 +28,8 @@ use App\Http\Controllers\Shopify\InstallPageController;
 use Osiset\ShopifyApp\Http\Controllers\HomeController;
 use App\Http\Controllers\KanbanController;
 
-
-\Osiset\ShopifyApp\ShopifyApp::routes();
+use Osiset\ShopifyApp\Http\Controllers\AuthController;
+use Osiset\ShopifyApp\Http\Controllers\HomeController;
 
 
 
@@ -213,8 +213,11 @@ Route::middleware(['guest', 'web'])->group(function () {
 // Shopify часть
 Route::get('/install-page', InstallPageController::class)->name('install.page');
 
+Route::get('/auth', [AuthController::class, 'index'])->name('shopify.auth');
+Route::get('/auth/callback', [AuthController::class, 'callback'])->name('shopify.callback');
+
 Route::middleware(['auth.shopify'])->group(function () {
-    Route::get('/shopify/dashboard', fn () => response('Shopify user'))->name('shopify.dashboard');
+    Route::get('/shopify/dashboard', [HomeController::class, 'index'])->name('shopify.dashboard');
 });
 
 
